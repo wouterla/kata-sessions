@@ -43,5 +43,4 @@ RSpec.describe Facing do
     expect(facing == :north).to be true
     expect(facing == :south).to be false
   end
-
 end

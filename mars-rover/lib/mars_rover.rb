@@ -1,14 +1,14 @@
 require 'facing'
 
 class MarsRover
-  def initialize(x,y,facing)
+  def initialize(x, y, facing)
     @x = x
     @y = y
     @facing = Facing.new(facing)
   end
 
   def position
-    return [@x,@y,@facing.direction]
+    [@x, @y, @facing.direction]
   end
 
   def forward

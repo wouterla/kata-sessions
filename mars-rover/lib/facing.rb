@@ -7,20 +7,20 @@ class Facing
     :west
   ]
 
-  def initialize(starting_direction=:north)
+  def initialize(starting_direction = :north)
     @current_direction = DIRECTIONS.index(starting_direction)
   end
 
-  def ==(facing)
-    if facing.is_a?(Symbol)
-      direction == facing
+  def ==(other)
+    if other.is_a?(Symbol)
+      direction == other
     else
-      direction == facing.direction
+      direction == other.direction
     end
   end
 
   def direction
-      DIRECTIONS[@current_direction]
+    DIRECTIONS[@current_direction]
   end
 
   def left
@@ -31,4 +31,3 @@ class Facing
     @current_direction = (@current_direction + 1) % 4
   end
 end
-
