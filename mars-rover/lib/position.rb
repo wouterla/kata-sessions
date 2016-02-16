@@ -1,4 +1,7 @@
 class Position
+  FORWARD_MOVEMENT_SCALE_FACTOR = 1
+  BACKWARD_MOVEMENT_SCALE_FACTOR = -1
+
   attr_reader :x, :y
 
   def initialize(x = 0, y = 0)
@@ -19,28 +22,27 @@ class Position
   end
 
   def forward(direction)
-    case direction.direction
-    when :north
-      @y += 1
-    when :south
-      @y -= 1
-    when :east
-      @x += 1
-    when :west
-      @x -= 1
-    end
+    movement(direction, FORWARD_MOVEMENT_SCALE_FACTOR)
   end
 
   def backward(direction)
-    case direction.direction
-    when :north
-      @y -= 1
-    when :south
-      @y += 1
-    when :east
-      @x -= 1
-    when :west
-      @x += 1
-    end
+    movement(direction, BACKWARD_MOVEMENT_SCALE_FACTOR)
+  end
+
+  private
+
+  def movement(direction, scale_factor)
+    direction_modifier = direction_scale(direction.increasing?)
+    movement = scale_factor * direction_modifier
+
+    Position.new(
+      direction.x_axis? ? x + movement : x,
+      direction.y_axis? ? y + movement : y
+    )
+  end
+
+
+  def direction_scale(increasing)
+    increasing ? 1 : -1
   end
 end
