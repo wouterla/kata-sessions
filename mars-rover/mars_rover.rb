@@ -1,3 +1,30 @@
+class Facing
+  DIRECTIONS = [
+    :north,
+    :east,
+    :south,
+    :west
+  ]
+
+  def initialize
+    @current_direction = 0
+  end
+
+  def direction
+      DIRECTIONS[@current_direction]
+  end
+
+  def left
+    @current_direction = (@current_direction - 1) % 4
+  end
+
+
+    def right
+      @current_direction = (@current_direction + 1) % 4
+    end
+end
+
+
 class MarsRover
   def initialize(x,y,facing)
     @x = x
@@ -73,7 +100,6 @@ class MarsRover
       when 'r'
         right
       end
-      
     end
   end
 end
