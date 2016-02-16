@@ -23,10 +23,25 @@ RSpec.describe Facing do
     expect(facing.direction).to eq :north
   end
 
-
   it 'can turn right 7 times and get to west' do
     facing = Facing.new
     7.times { facing.right }
     expect(facing.direction).to eq :west
   end
+
+  it 'supports equality comparison with other Facing' do
+    facing1a = Facing.new(:north)
+    facing1b = Facing.new(:north)
+    facing2 = Facing.new(:south)
+
+    expect(facing1a == facing1b).to be true
+    expect(facing1a == facing2).to be false
+  end
+
+  it 'can be compared to a symbol' do
+    facing = Facing.new(:north)
+    expect(facing == :north).to be true
+    expect(facing == :south).to be false
+  end
+
 end

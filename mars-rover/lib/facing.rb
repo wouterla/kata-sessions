@@ -11,6 +11,14 @@ class Facing
     @current_direction = DIRECTIONS.index(starting_direction)
   end
 
+  def ==(facing)
+    if facing.is_a?(Symbol)
+      direction == facing
+    else
+      direction == facing.direction
+    end
+  end
+
   def direction
       DIRECTIONS[@current_direction]
   end
