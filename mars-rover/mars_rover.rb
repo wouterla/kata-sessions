@@ -70,7 +70,7 @@ class MarsRover
   end
 
   def move(move_string)
-    move_string.split(//).each do |move|
+    move_string.downcase.split(//).each do |move|
       case move
       when 'f'
         forward

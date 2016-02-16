@@ -111,4 +111,10 @@ end
       expect(rover.position).to match_array([2,2,:east])
     end
 
+    it 'takes a string with small and capitals move commands' do
+      rover = MarsRover.new(0,0,:north)
+      rover.move('fFrFF')
+      expect(rover.position).to match_array([2,2,:east])
+    end
+
 end
