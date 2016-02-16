@@ -13,6 +13,15 @@ RSpec.describe Position do
     expect(position.to_s).to eq '[5, 2]'
   end
 
+  it 'supports equality comparison with another Position' do
+    position1a = Position.new(9, 5)
+    position1b = Position.new(9, 5)
+    position2 = Position.new(5, 9)
+
+    expect(position1a).to eq position1b
+    expect(position1a).to_not eq position2
+  end
+
   context 'when facing north' do
     let(:north) { Facing.new(:north) }
 

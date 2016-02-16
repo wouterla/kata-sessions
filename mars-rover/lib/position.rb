@@ -14,6 +14,10 @@ class Position
     "#<Position: #{self}>"
   end
 
+  def ==(other)
+    x == other.x && y == other.y
+  end
+
   def forward(direction)
     case direction.direction
     when :north
