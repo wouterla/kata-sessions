@@ -7,6 +7,8 @@ class Facing
     :west
   ]
 
+  DIRECTION_COUNT = DIRECTIONS.length
+
   def initialize(starting_direction = :north)
     @current_direction = DIRECTIONS.index(starting_direction)
   end
@@ -24,10 +26,10 @@ class Facing
   end
 
   def left
-    @current_direction = (@current_direction - 1) % 4
+    @current_direction = (@current_direction - 1) % DIRECTION_COUNT
   end
 
   def right
-    @current_direction = (@current_direction + 1) % 4
+    @current_direction = (@current_direction + 1) % DIRECTION_COUNT
   end
 end
