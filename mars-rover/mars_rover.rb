@@ -6,12 +6,12 @@ class Facing
     :west
   ]
 
-  def initialize(starting_direction=:north)
+  def initialize(starting_direction = :north)
     @current_direction = DIRECTIONS.index(starting_direction)
   end
 
   def direction
-      DIRECTIONS[@current_direction]
+    DIRECTIONS[@current_direction]
   end
 
   def left
@@ -32,7 +32,7 @@ class MarsRover
   end
 
   def position
-    return [@x,@y,@facing.direction]
+    return [@x, @y, @facing.direction]
   end
 
   def forward
