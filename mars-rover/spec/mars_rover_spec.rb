@@ -16,6 +16,7 @@ RSpec.describe 'A Mars Rover' do
     rover.forward
     expect(rover.position).to match_array([0, 1, :north])
   end
+
   it 'will do one backward' do
     rover = MarsRover.new(0, 1, :north)
     rover.backward

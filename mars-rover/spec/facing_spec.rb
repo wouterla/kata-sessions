@@ -43,4 +43,14 @@ RSpec.describe Facing do
     expect(facing == :north).to be true
     expect(facing == :south).to be false
   end
+
+  it 'can be printed' do
+    facing = Facing.new(:north)
+    expect(facing.to_s).to eq 'North'
+  end
+
+  it 'has a pretty printed inspect string' do
+    facing = Facing.new(:north)
+    expect(facing.inspect).to eq '#<Facing: North>'
+  end
 end

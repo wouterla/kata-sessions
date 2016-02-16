@@ -13,6 +13,14 @@ class Facing
     @current_direction = DIRECTIONS.index(starting_direction)
   end
 
+  def to_s
+    direction.to_s.capitalize
+  end
+
+  def inspect
+    "#<Facing: #{self}>"
+  end
+
   def ==(other)
     if other.is_a?(Symbol)
       direction == other
