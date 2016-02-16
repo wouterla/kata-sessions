@@ -2,7 +2,6 @@ require 'mars_rover'
 require 'facing'
 require 'position'
 
-
 RSpec.describe 'A Mars Rover' do
   before :each do
     starting_position = Position.new(3, 3)

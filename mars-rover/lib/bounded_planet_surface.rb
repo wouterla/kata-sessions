@@ -15,6 +15,7 @@ class BoundedPlanetSurface
   end
 
   private
+
   def position_within_bounds?(position)
     x_range.include?(position.x) && y_range.include?(position.y)
   end

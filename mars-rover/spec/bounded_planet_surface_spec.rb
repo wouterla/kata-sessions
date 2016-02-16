@@ -5,11 +5,11 @@ RSpec.describe BoundedPlanetSurface do
   let(:surface) { BoundedPlanetSurface.new(5, 10) }
 
   it 'has a range of x values' do
-    expect(surface.x_range).to eq (0..5)
+    expect(surface.x_range).to eq Range.new(0, 5)
   end
 
   it 'has a range of y values' do
-    expect(surface.y_range).to eq (0..10)
+    expect(surface.y_range).to eq Range.new(0, 10)
   end
 
   context 'when at a position inside the boundary' do
