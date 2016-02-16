@@ -1,8 +1,8 @@
 require 'rspec'
-require_relative 'mars_rover'
+require_relative '../lib/mars_rover'
 
 
-describe Facing do
+RSpec.describe Facing do
   it 'will default to the north direction' do
     facing = Facing.new
     expect(facing.direction).to eq :north
@@ -33,7 +33,7 @@ describe Facing do
     end
 end
 
-describe 'A Mars Rover' do
+RSpec.describe 'A Mars Rover' do
 
   it 'will return the start position and facing' do
     rover = MarsRover.new(0,0,:north)
