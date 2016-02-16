@@ -21,8 +21,29 @@ class Facing
   def right
     @current_direction = (@current_direction + 1) % 4
   end
-end
 
+  def xprogress
+    case direction
+    when :west
+      return -1
+    when :east
+      return 1
+    else
+      return 0
+    end
+  end
+
+  def yprogress
+    case direction
+    when :north
+      return 1
+    when :south
+      return -1
+    else
+      return 0
+    end
+  end
+end
 
 class MarsRover
   def initialize(x,y,facing)
@@ -36,29 +57,13 @@ class MarsRover
   end
 
   def forward
-    case @facing.direction
-    when :north
-      @y += 1
-    when :south
-      @y -= 1
-    when :west
-      @x -= 1
-    when :east
-      @x += 1
-    end
+    @x += @facing.xprogress
+    @y += @facing.yprogress
   end
 
   def backward
-    case @facing.direction
-    when :north
-      @y -= 1
-    when :south
-      @y += 1
-    when :west
-      @x += 1
-    when :east
-      @x -= 1
-    end
+    @x -= @facing.xprogress
+    @y -= @facing.yprogress
   end
 
   def left
