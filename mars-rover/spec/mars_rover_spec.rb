@@ -77,4 +77,10 @@ RSpec.describe 'A Mars Rover' do
     rover.move('ffrff')
     expect(rover.position).to match_array([2, 2, :east])
   end
+
+  it 'takes uppercase movement commands' do
+    rover = MarsRover.new(0, 0, :north)
+    rover.move('FFRFF')
+    expect(rover.position).to match_array([2, 2, :east])
+  end
 end

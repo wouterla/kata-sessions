@@ -28,7 +28,7 @@ class MarsRover
   end
 
   def move(move_string)
-    move_string.each_char { |move| single_move(move) }
+    move_string.downcase.each_char { |move| single_move(move) }
   end
 
   def single_move(move)
