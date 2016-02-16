@@ -53,4 +53,28 @@ RSpec.describe Facing do
     facing = Facing.new(:north)
     expect(facing.inspect).to eq '#<Facing: North>'
   end
+
+  it 'is facing along the x-axis when east' do
+    facing = Facing.new(:east)
+    expect(facing.x_axis?).to be true
+    expect(facing.y_axis?).to be false
+  end
+
+  it 'is facing along the y-axis when south' do
+    facing = Facing.new(:south)
+    expect(facing.x_axis?).to be false
+    expect(facing.y_axis?).to be true
+  end
+
+  it 'has an increasing coordinate when facing north' do
+    facing = Facing.new(:north)
+    expect(facing.increasing?).to be true
+    expect(facing.decreasing?).to be false
+  end
+
+  it 'has a decreasing coordinate when facing west' do
+    facing = Facing.new(:west)
+    expect(facing.increasing?).to be false
+    expect(facing.decreasing?).to be true
+  end
 end

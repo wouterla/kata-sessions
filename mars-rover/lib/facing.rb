@@ -40,4 +40,20 @@ class Facing
   def right
     @current_direction = (@current_direction + 1) % DIRECTION_COUNT
   end
+
+  def x_axis?
+    [:east, :west].include? direction
+  end
+
+  def y_axis?
+    [:north, :south].include? direction
+  end
+
+  def increasing?
+    [:north, :east].include? direction
+  end
+
+  def decreasing?
+    [:south, :west].include? direction
+  end
 end
