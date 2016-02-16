@@ -8,6 +8,11 @@ describe Facing do
     expect(facing.direction).to eq :north
   end
 
+  it 'will start with another direction' do
+    facing = Facing.new(:east)
+    expect(facing.direction).to eq :east
+  end
+
   it 'can turn left' do
     facing = Facing.new
     facing.left

@@ -6,8 +6,8 @@ class Facing
     :west
   ]
 
-  def initialize
-    @current_direction = 0
+  def initialize(starting_direction=:north)
+    @current_direction = DIRECTIONS.index(starting_direction)
   end
 
   def direction
@@ -18,10 +18,9 @@ class Facing
     @current_direction = (@current_direction - 1) % 4
   end
 
-
-    def right
-      @current_direction = (@current_direction + 1) % 4
-    end
+  def right
+    @current_direction = (@current_direction + 1) % 4
+  end
 end
 
 
@@ -29,15 +28,15 @@ class MarsRover
   def initialize(x,y,facing)
     @x = x
     @y = y
-    @facing = facing
+    @facing = Facing.new(facing)
   end
 
   def position
-    return [@x,@y,@facing]
+    return [@x,@y,@facing.direction]
   end
 
   def forward
-    case @facing
+    case @facing.direction
     when :north
       @y += 1
     when :south
@@ -50,7 +49,7 @@ class MarsRover
   end
 
   def backward
-    case @facing
+    case @facing.direction
     when :north
       @y -= 1
     when :south
@@ -63,29 +62,11 @@ class MarsRover
   end
 
   def left
-    case @facing
-    when :north
-      @facing = :west
-    when :south
-      @facing = :east
-    when :west
-      @facing = :south
-    when :east
-      @facing = :north
-    end
+    @facing.left
   end
 
   def right
-    case @facing
-    when :north
-      @facing = :east
-    when :south
-      @facing = :west
-    when :west
-      @facing = :north
-    when :east
-      @facing = :south
-    end
+    @facing.right
   end
 
   def move(move_string)
