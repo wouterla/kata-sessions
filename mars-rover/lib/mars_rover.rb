@@ -1,10 +1,7 @@
-require 'facing'
-require 'position'
-
 class MarsRover
-  def initialize(x, y, facing)
-    @position = Position.new(x, y)
-    @facing = Facing.new(facing)
+  def initialize(starting_position, starting_facing)
+    @position = starting_position
+    @facing = starting_facing
   end
 
   def position

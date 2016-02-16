@@ -1,7 +1,16 @@
 require 'mars_rover'
+require 'facing'
+require 'position'
+
 
 RSpec.describe 'A Mars Rover' do
-  let(:rover) { MarsRover.new(3, 3, :north) }
+  before :each do
+    starting_position = Position.new(3, 3)
+    starting_facing = Facing.new(:north)
+    @rover = MarsRover.new(starting_position, starting_facing)
+  end
+
+  let(:rover) { @rover }
 
   it 'has a current position' do
     expect(rover.position).to match_array([3, 3, :north])
