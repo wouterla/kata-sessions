@@ -1,13 +1,16 @@
 require 'mars_rover'
 require 'facing'
 require 'position'
+require 'bounded_planet_surface'
+require 'infinite_planet_surface'
 
 RSpec.describe 'A Mars Rover' do
   context 'when driving over an infinite plane' do
     before :each do
       starting_position = Position.new(3, 3)
       starting_facing = Facing.new(:north)
-      @rover = MarsRover.new(starting_position, starting_facing)
+      planet_surface = InfinitePlanetSurface.new
+      @rover = MarsRover.new(starting_position, starting_facing, planet_surface)
     end
 
     let(:rover) { @rover }
@@ -77,6 +80,39 @@ RSpec.describe 'A Mars Rover' do
     it 'takes uppercase movement commands' do
       rover.move('FFRFF')
       expect(rover.position).to match_array([5, 5, :east])
+    end
+  end
+
+  context 'when driving over a bounded plane' do
+    before :each do
+      starting_position = Position.new(3, 3)
+      starting_facing = Facing.new(:north)
+      planet_surface = BoundedPlanetSurface.new(5, 5)
+      @rover = MarsRover.new(starting_position, starting_facing, planet_surface)
+    end
+
+    let(:rover) { @rover }
+
+    it 'cannot drive past the northern boundary' do
+      5.times { rover.forward }
+      expect(rover.position).to match_array([3, 5, :north])
+    end
+
+    it 'cannot drive past the southern boundary' do
+      5.times { rover.backward }
+      expect(rover.position).to match_array([3, 0, :north])
+    end
+
+    it 'cannot drive past the eastern boundary' do
+      rover.right
+      15.times { rover.forward }
+      expect(rover.position).to match_array([5, 3, :east])
+    end
+
+    it 'cannot drive past the western boundary' do
+      rover.left
+      18.times { rover.forward }
+      expect(rover.position).to match_array([0, 3, :west])
     end
   end
 end

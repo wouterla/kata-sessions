@@ -1,7 +1,8 @@
 class MarsRover
-  def initialize(starting_position, starting_facing)
+  def initialize(starting_position, starting_facing, planet_surface)
     @position = starting_position
     @facing = starting_facing
+    @planet_surface = planet_surface
   end
 
   def position
