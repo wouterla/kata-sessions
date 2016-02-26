@@ -11,13 +11,13 @@ class RoverCoordinate
   def +(coordinate)
     new_x = @x + coordinate.x
     new_y = @y + coordinate.y
-    return RoverCoordinate.new(new_x, new_y)
+    RoverCoordinate.new(new_x, new_y)
   end
 
   def -(coordinate)
     new_x = @x - coordinate.x
     new_y = @y - coordinate.y
-    return RoverCoordinate.new(new_x, new_y)
+    RoverCoordinate.new(new_x, new_y)
   end
 
   def ==(coordinate)
@@ -25,16 +25,16 @@ class RoverCoordinate
   end
 
   def to_s
-    return "(#{@x},#{@y})"
+    "(#{@x},#{@y})"
   end
 
-  def coordinate_from_vector(direction)
+  def self.coordinate_from_vector(direction)
     delta_coordinate = RoverCoordinate.new( 0, 1) if direction == $NORTH
     delta_coordinate = RoverCoordinate.new( 1, 0) if direction == $EAST
     delta_coordinate = RoverCoordinate.new( 0,-1) if direction == $SOUTH
     delta_coordinate = RoverCoordinate.new(-1, 0) if direction == $WEST
 
-    return self + delta_coordinate
+    delta_coordinate
   end
 end
 
@@ -62,7 +62,7 @@ class RoverGrid
   def reposition coordinate
     coordinate.x = simple_wrap_x(coordinate.x)
     coordinate.y = simple_wrap_y(coordinate.y)
-    return coordinate
+    coordinate
   end
 
   def simple_wrap_x x
@@ -71,13 +71,17 @@ class RoverGrid
   def simple_wrap_y y
     simple_wrap(@bottom_left.y, @top_right.y, y)
   end 
-  def simple_wrap(bottom, top, reposition)
-    if reposition < bottom then
-      reposition += (top-bottom+1)
-    elsif reposition > top then
-      reposition -= (top-bottom+1)
+
+  def simple_wrap(bottom, top, position)
+
+    nodes_on_gridline = top - bottom + 1
+
+    if position < bottom then
+      position += nodes_on_gridline
+    elsif position > top then
+      position -= nodes_on_gridline
     end
-    reposition
+    position
   end
 
   def obstacle? coordinate
@@ -87,5 +91,4 @@ class RoverGrid
       return @obstacles.include?coordinate
     end
   end
-
 end

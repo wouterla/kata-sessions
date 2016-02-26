@@ -19,7 +19,7 @@ class MarsRover
   end
 
   def get_position
-      return [@current_coordinate.to_s,@facing.to_s]
+    [@current_coordinate.to_s,@facing.to_s]
   end
 
   def execute commands
@@ -28,18 +28,18 @@ class MarsRover
     commands.downcase.each_char do |command|
       cmd=RoverCommand.new(command)
       if cmd.step_command? then
-        delta_coordinate = RoverCoordinate.new.coordinate_from_vector(@facing.to_s)
+        delta_coordinate = RoverCoordinate.coordinate_from_vector(@facing.to_s)
 
-        new_coordinate = @current_coordinate + delta_coordinate if cmd.step_forward?
-        new_coordinate = @current_coordinate - delta_coordinate if cmd.step_backward?
+        next_coordinate = @current_coordinate + delta_coordinate if cmd.step_forward?
+        next_coordinate = @current_coordinate - delta_coordinate if cmd.step_backward?
 
-        new_coordinate = @grid.reposition(new_coordinate) unless @grid.on_grid?new_coordinate
+        next_coordinate = @grid.reposition(next_coordinate) unless @grid.on_grid?next_coordinate
 
-        if @grid.obstacle?new_coordinate then
-          @obstacle = new_coordinate
+        if @grid.obstacle?next_coordinate then
+          @obstacle = next_coordinate
           return
         end
-        @current_coordinate = new_coordinate
+        @current_coordinate = next_coordinate
       end
 
       if cmd.turn_command? then
@@ -56,7 +56,7 @@ class RoverCommand
   end
 
   def step_command?
-    return step_forward? || step_backward?
+    step_forward? || step_backward?
   end
 
   def step_forward?
@@ -68,15 +68,15 @@ class RoverCommand
   end
 
   def turn_command?
-    return turn_right? || turn_left?
+    turn_right? || turn_left?
   end
 
   def turn_right?
-    return @command == $TURN_RIGHT
+    @command == $TURN_RIGHT
   end
 
   def turn_left?
-    return @command == $TURN_LEFT
+    @command == $TURN_LEFT
   end
 end
 

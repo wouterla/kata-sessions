@@ -32,7 +32,7 @@ describe 'A Rover Coordinate' do
   end
 
   it 'should convert a vector ("n") to coordinate (0,1)' do
-    rovercoordinate =  RoverCoordinate.new.coordinate_from_vector('n')
+    rovercoordinate =  RoverCoordinate.coordinate_from_vector('n')
     expect(rovercoordinate.to_s).to eq('(0,1)')
   end
 
