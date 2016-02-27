@@ -1,4 +1,4 @@
-class BoundedPlanetSurface
+class TorusPlanetSurface
   attr_reader :x_range, :y_range
 
   def initialize(max_x, max_y)
@@ -29,12 +29,8 @@ class BoundedPlanetSurface
   end
 
   def lock_position_to_boundary(position)
-    x = clamp(position.x, x_range)
-    y = clamp(position.y, y_range)
-    Position.new(x, y)
-  end
-
-  def clamp(value, range)
-    [range.min, value, range.max].sort[1]
+    mapped_x = position.x % x_range.size
+    mapped_y = position.y % y_range.size
+    Position.new(mapped_x, mapped_y)
   end
 end

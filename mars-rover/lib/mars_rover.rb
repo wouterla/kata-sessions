@@ -10,11 +10,11 @@ class MarsRover
   end
 
   def forward
-    @position = @planet_surface.position(@position.forward(@facing))
+    @position = @planet_surface.forward(@position, @facing)
   end
 
   def backward
-    @position = @planet_surface.position(@position.backward(@facing))
+    @position = @planet_surface.backward(@position, @facing)
   end
 
   def left
