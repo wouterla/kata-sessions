@@ -1,10 +1,18 @@
+require 'rocky_surface'
+
 class InfinitePlanetSurface
+  include RockySurface
+
+  def initialize
+    clear_obstacles
+  end
+
   def forward(position, facing)
-    [position(position.forward(facing)), facing]
+    check_for_obstacles(position, position.forward(facing))
   end
 
   def backward(position, facing)
-    [position(position.backward(facing)), facing]
+    check_for_obstacles(position, position.backward(facing))
   end
 
   def position(position)

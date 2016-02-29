@@ -1,17 +1,22 @@
+require 'rocky_surface'
+
 class TorusPlanetSurface
   attr_reader :x_range, :y_range
+  include RockySurface
 
   def initialize(max_x, max_y)
+    clear_obstacles
     @x_range = 0..max_x
     @y_range = 0..max_y
   end
 
+
   def forward(position, facing)
-    [position(position.forward(facing)), facing]
+    check_for_obstacles(position, position.forward(facing))
   end
 
   def backward(position, facing)
-    [position(position.backward(facing)), facing]
+    check_for_obstacles(position, position.backward(facing))
   end
 
   def position(position)

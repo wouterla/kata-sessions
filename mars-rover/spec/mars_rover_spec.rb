@@ -1,6 +1,7 @@
 require 'mars_rover'
 require 'facing'
 require 'position'
+require 'obstacle'
 require 'bounded_planet_surface'
 require 'infinite_planet_surface'
 
@@ -9,8 +10,8 @@ RSpec.describe 'A Mars Rover' do
     before :each do
       starting_position = Position.new(3, 3)
       starting_facing = Facing.new(:north)
-      planet_surface = InfinitePlanetSurface.new
-      @rover = MarsRover.new(starting_position, starting_facing, planet_surface)
+      @planet_surface = InfinitePlanetSurface.new
+      @rover = MarsRover.new(starting_position, starting_facing, @planet_surface)
     end
 
     let(:rover) { @rover }
@@ -81,14 +82,23 @@ RSpec.describe 'A Mars Rover' do
       rover.move('FFRFF')
       expect(rover.position).to match_array([5, 5, :east])
     end
+
+    it 'stops before impacting an obstacle and reports failure' do
+      @planet_surface.add_obstacle Obstacle.new(Position.new(3,7))
+      expect(rover.stopped?).to be false
+      rover.move('fffffffffff')
+      expect(rover.position).to match_array([3, 6, :north])
+      expect(rover.stopped?).to be true
+      expect(rover.completed_move).to eq 'fff'
+    end
   end
 
   context 'when driving over a bounded plane' do
     before :each do
       starting_position = Position.new(3, 3)
       starting_facing = Facing.new(:north)
-      planet_surface = BoundedPlanetSurface.new(5, 5)
-      @rover = MarsRover.new(starting_position, starting_facing, planet_surface)
+      @planet_surface = BoundedPlanetSurface.new(5, 5)
+      @rover = MarsRover.new(starting_position, starting_facing, @planet_surface)
     end
 
     let(:rover) { @rover }
@@ -113,6 +123,15 @@ RSpec.describe 'A Mars Rover' do
       rover.left
       18.times { rover.forward }
       expect(rover.position).to match_array([0, 3, :west])
+    end
+
+    it 'stops before impacting an obstacle and reports failure' do
+      @planet_surface.add_obstacle Obstacle.new(Position.new(3,4))
+      expect(rover.stopped?).to be false
+      rover.move('fffffffffff')
+      expect(rover.position).to match_array([3, 3, :north])
+      expect(rover.completed_move).to eq ''
+      expect(rover.stopped?).to be true
     end
   end
 end
