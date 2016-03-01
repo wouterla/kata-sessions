@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative 'gilded_rose'
+require 'gilded_rose'
 
 describe GildedRose do
 
