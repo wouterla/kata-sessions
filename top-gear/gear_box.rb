@@ -26,24 +26,24 @@ class GearBox
     @e = 0
   end
 
-	def doit(i)
-		if @s < 0
-			# do nothing!
-			@e = i
-		else
-		  if @s > 0
-				if i > 2000
-					@s += 1
-				elsif i < 500
-					@s -= 1
-				end
-			if @s > 6
-				@s -= 1
-			else @s < 1
-				@s += 1
-			end
-			@e = i
+  def doit(i)
+    if @s < 0
+      # do nothing!
+      @e = i
+    else
+      if @s > 0
+        if i > 2000
+          @s += 1
+        elsif i < 500
+          @s -= 1
+        end
+      if @s > 6
+        @s -= 1
+      else @s < 1
+        @s += 1
       end
-	   end
+      @e = i
+      end
+     end
    end
 end
