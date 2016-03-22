@@ -1,5 +1,5 @@
 #!/usr/bin/ruby -w
-require_relative 'gilded_rose'
+require_relative 'lib/gilded_rose'
 
 puts "OMGHAI!"
 items = [
